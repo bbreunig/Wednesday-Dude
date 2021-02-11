@@ -6,7 +6,7 @@ bot.login(process.env.token);
 bot.on("ready", () => {
     console.log("Bot activated. Ready to scream"); 
     var curDate = new Date();
-    while(true) {
+    // while(true) {
         var curday = curDate.getDay();
 
         console.log(curday);
@@ -22,5 +22,5 @@ bot.on("ready", () => {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
         }
-    }
+    // }
 });
