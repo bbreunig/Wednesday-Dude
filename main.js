@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const date = require("dayjs");
+ const date = dayjs();
 const bot = new Discord.Client();
 
 bot.on("ready", () => {
