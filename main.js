@@ -14,12 +14,16 @@ bot.on("ready", () => {
 bot.on("message", message => {
     console.log("message received: " + message.content);
     if (message.content === '!dude') {
+        console.log("If clause fails me");
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay != 3) {
             var nextday = nextwdn.getDate()+1;
             nextwdn.setDate(nextday);
         }
+        nextwdn.setHours(0);
+        nextwdn.setMinutes(0);
+        nextwdn.setSeconds(0);
 
         var distance = nextwdn - current;
 
