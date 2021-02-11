@@ -17,7 +17,7 @@ bot.on("ready", () => {
 
 
         if(curday == 3) {   
-            console.log("It's wednesday my Dudes");
+            setTimeout(() => console.log("It's wednesday my Dudes"), 1000);
             test.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
