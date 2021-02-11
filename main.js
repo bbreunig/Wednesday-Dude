@@ -27,6 +27,7 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
+    console.log("message received: " + message);
     if (message === "!dude") {
         var current = new Date(),
         nextwdn = new Date();
