@@ -17,7 +17,7 @@ bot.on('message', message => {
         console.log("If clause fails me");
         var current = new Date(),
         nextwdn = new Date();
-        while(nextwdn.getDay != 3) {
+        while(nextwdn.getDay() != 3) {
             var nextday = nextwdn.getDate()+1;
             nextwdn.setDate(nextday);
         }
