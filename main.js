@@ -12,7 +12,7 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
-    console.log("message received: " + message);
+    console.log("message received: " + message.content);
     if (message.content === "!dude") {
         var current = new Date(),
         nextwdn = new Date();
