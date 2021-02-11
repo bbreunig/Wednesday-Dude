@@ -11,7 +11,7 @@ bot.on("ready", () => {
     checkWdn();
 });
 
-bot.on("message", message => {
+bot.on('message', message => {
     console.log("message received: " + message.content);
     if (message.content === '!dude') {
         console.log("If clause fails me");
