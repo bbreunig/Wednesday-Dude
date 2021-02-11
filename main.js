@@ -13,8 +13,7 @@ bot.on("ready", () => {
 
 bot.on('message', message => {
     console.log("message received: " + message.content);
-    if (message.content.toLowerCase() === '!dude') {
-        // console.log("If clause fails me");
+    if (message.content.toLowerCase() === '!dude' || message.content.toLowerCase() === '!dudette') {
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay() != 3) {
@@ -31,28 +30,10 @@ bot.on('message', message => {
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        // console.log("Next wednesday will be in " + days + ":" + hours + ":" + minutes + ":" + seconds);
         message.channel.send("Next wednesday will be in " + days + "days " + hours + "hours " + minutes + "minutes and " + seconds + "seconds");
-    } else if (message.content.toLowerCase() === '!dudette') {
-        // console.log("If clause fails me");
-        var current = new Date(),
-        nextwdn = new Date();
-        while(nextwdn.getDay() != 3) {
-            var nextday = nextwdn.getDate()+1;
-            nextwdn.setDate(nextday);
+        if (message.content.toLowerCase() === "!dudette") {
+            message.channel.send("UwU");
         }
-        nextwdn.setHours(0);
-        nextwdn.setMinutes(0);
-        nextwdn.setSeconds(0);
-
-        var distance = nextwdn - current;
-
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        // console.log("Next wednesday will be in " + days + ":" + hours + ":" + minutes + ":" + seconds);
-        message.channel.send("Next wednesday will be in " + days + "days " + hours + "hours " + minutes + "minutes and " + seconds + "seconds UwU");
     }
 });
 
@@ -63,8 +44,6 @@ function checkWdn() {
         channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
             files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
         });
-    } else {
-        console.log(date.getMinutes() + ":" + date.getSeconds());
     }
     setTimeout(checkWdn, 1000);
 }
