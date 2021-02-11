@@ -27,4 +27,23 @@ bot.on("ready", () => {
     checkWdn();
 });
 
+bot.on("message", message => {
+    if (message.toString().toLowerCase() === "!dude") {
+        var current = new Date(),
+        nextwdn = new Date();
+        while(nextwdn.getDay != 3) {
+            var nextday = nextwdn.getDate()+1;
+            nextwdn.setDate(nextday);
+        }
+
+        var distance = nextwdn - current;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        message.channel.send("Next wednesday will be in " + days + ":" + hours + ":" + minutes + ":" + seconds);
+    }
+});
+
 bot.login(process.env.token);
