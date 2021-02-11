@@ -28,7 +28,7 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
-    if (message.toString().toLowerCase() === "!dude") {
+    if (message === "!dude") {
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay != 3) {
