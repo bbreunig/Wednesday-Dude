@@ -13,7 +13,7 @@ bot.on("ready", () => {
 
 bot.on("message", message => {
     console.log("message received: " + message.content);
-    if (message.content === "!dude") {
+    if (message.content === '!dude') {
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay != 3) {
