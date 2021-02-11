@@ -12,7 +12,7 @@ function checkWdn() {
             files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
         });
     } else {
-        console.log(date.getSeconds());
+        console.log(date.now().getSeconds());
     }
     setTimeout(checkWdn, 1000);
 }
