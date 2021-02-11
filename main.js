@@ -22,6 +22,3 @@ bot.on("ready", () => {
         });
     }
 });
-
-
-//ODA5MTMwMzE5MTg5MTE0OTQx.YCQnVQ.YmeXfZEWAWou1mwH4Mf2bnG882k
