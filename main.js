@@ -11,6 +11,8 @@ function checkWdn() {
         channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
             files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
         });
+    } else {
+        console.log(date.getSeconds());
     }
     setTimeout(checkWdn, 1000);
 }
@@ -18,7 +20,7 @@ function checkWdn() {
 bot.on("ready", () => {
     console.log("Bot activated. Ready to scream"); 
     
-    console.log();
+    console.log(date);
     
     
     const test = bot.channels.cache.find(channel => channel.id === "428856232485453825");
