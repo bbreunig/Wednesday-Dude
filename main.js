@@ -17,7 +17,7 @@ bot.on("ready", () => {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
         }
-        if(date.getMinutes() === 51) {
+        if(date.getMinutes() === 12) {
             channel.send("It's just a test");
             console.log("sending to channel: " + channel.name);
         }
