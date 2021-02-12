@@ -44,10 +44,8 @@ bot.on('message', message => {
             message.channel.send("UwU");
         }
     }
-    if (message.content.toLocaleLowerCase() === '!info') {
-        message.channel.send("Type !info to get this message.\n\
-                                Type !dude to get excited for next wednesday.\n\
-                                Type !frog to choose the channel for Dude!");
+    if (message.content.toLocaleLowerCase() === '!sauce') {
+        message.channel.send("```Type !sauce to get this message.\nType !dude to get excited for next wednesday.\nType !frog to choose the channel for Dude!```");
     }
     if (message.content.toLocaleLowerCase() === '!frog') {
         message.channel.send("Dude will inform you in this channel of every wednesday. For the rest of your life.");
