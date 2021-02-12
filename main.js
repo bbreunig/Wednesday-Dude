@@ -18,6 +18,7 @@ bot.on("ready", () => {
             channel.send("It's just a test");
             console.log("sending to channel: " + channel.name);
         }
+        console.log("pls get to this point");
         setTimeout(function(){
         console.log('pls Timeout');
         },1000);
