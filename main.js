@@ -1,7 +1,16 @@
 const Discord = require('discord.js');
+const fs = require("fs");
 const bot = new Discord.Client();
 
 var currentchannel;
+
+var stream = fs.readFile('~/channels', 'utf8' , (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    currentchannel = data.trim(",");
+  });
 
 bot.on("guildCreate", message => {
     message.send("Hello my dudes. To stay informed of wednesdays, please type !frog into the desired channel for more info type !sauce");
@@ -12,20 +21,21 @@ bot.on("ready", () => {
     
     setInterval(() => {
         var date = new Date();
-        
         if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {   
-            bot.channels.fetch(currentchannel)
-                .then(channel => console.log(channel.name))
-                .catch(console.error);
-            currentchannel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
-                files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
-            });
+            for(var i = 0; i < currentchannel.length; i++) {
+                currentchannel[i].send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
+                    files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
+                });
+            }
         }
         if(date.getSeconds() === 3) {
-            bot.channels.fetch(currentchannel)
-                .then(channel => console.log(channel.name))
-                .catch(console.error);
-            currentchannel.send("Only !frog does the trick!");
+            for(var i = 0; i < currentchannel.length; i++) {
+                bot.channels.fetch(currentchannel[i])
+                    .then(channel => console.log(channel.name))
+                    .catch(console.error);
+                currentchannel[i].send("Only !frog does the trick!")
+                    .catch(console.error);
+            }
         }
     }, 1000);
 });
@@ -58,7 +68,13 @@ bot.on('message', message => {
     }
     if (message.content.toLowerCase() === '!frog') {
         message.channel.send("Dude will inform you in this channel of every wednesday. For the rest of your life.");
-        currentchannel = message.channel.id;
+        fs.writeFile('~/channels', message.channel.id + ",",  err => {
+            if (err) {
+              console.error(err)
+              return
+            }
+            //file written successfully
+          });
     }
 });
 
