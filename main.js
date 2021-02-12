@@ -10,8 +10,8 @@ bot.on("ready", () => {
     
     const test = bot.channels.cache.find(channel => channel.id === "428856232485453825");
     // var ourchannel = Discord.channel.id("764604038271467553");
-    while(true) {
-        sleep(2000).then(() => {  
+    while(bot.uptime != 0) {
+        sleep(1000).then(() => {  
                 var date = new Date();
                 const channel = bot.channels.cache.find(channel => channel.createdTimestamp === Discord.Guild.createdTimestamp);
             if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 0)) {   
