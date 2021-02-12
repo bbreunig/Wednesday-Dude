@@ -39,13 +39,18 @@ bot.on('message', message => {
 
 function checkWdn() {
     var date = new Date();
-    const channel = bot.channels.cache.find(channel => channel.id === "764604038271467553");
+    const channel = bot.channels.cache.find(channel => channel.createdTimestamp === Discord.Guild.createdTimestamp);
     if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 0)) {   
         channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
             files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
         });
     }
+    if(date.getMinutes() === 38) {
+        channel.send("It's just a test");
+    }
     setTimeout(checkWdn, 1000);
 }
+
+// "764604038271467553"
 
 bot.login(process.env.token);
