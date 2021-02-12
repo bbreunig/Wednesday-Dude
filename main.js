@@ -6,7 +6,6 @@ bot.on("ready", () => {
     
     const test = bot.channels.cache.find(channel => channel.id === "428856232485453825");
     // var ourchannel = Discord.channel.id("764604038271467553"); 
-    while(true){
         function doNothing() {
             console.log("pls Timeout");
         }
@@ -17,13 +16,12 @@ bot.on("ready", () => {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
         }
-        if(date.getMinutes() === 16) {
+        if(date.getMinutes() === 18) {
             channel.send("It's just a test");
             console.log("sending to channel: " + channel.name);
         }
         console.log("pls get to this point");
-        setTimeout(function() {console.log("myAss");}, 1000);
-    }
+        setTimeout(doNothing(), 1000);
 });
 
 bot.on('message', message => {
