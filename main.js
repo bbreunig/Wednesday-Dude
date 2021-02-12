@@ -7,6 +7,9 @@ bot.on("ready", () => {
     const test = bot.channels.cache.find(channel => channel.id === "428856232485453825");
     // var ourchannel = Discord.channel.id("764604038271467553"); 
     while(true){
+        function doNothing() {
+            console.log("pls Timeout");
+        }
         var date = new Date();
             const channel = bot.channels.cache.find(channel => channel.createdTimestamp === Discord.Guild.createdTimestamp);
         if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 0)) {   
@@ -19,9 +22,7 @@ bot.on("ready", () => {
             console.log("sending to channel: " + channel.name);
         }
         console.log("pls get to this point");
-        setTimeout(function(){
-        console.log('pls Timeout');
-        },1000);
+        setTimeout(doNothing(),1000);
     }
 });
 
