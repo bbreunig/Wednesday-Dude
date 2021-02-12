@@ -18,6 +18,7 @@ bot.on("ready", () => {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
         }
+        if(date.getSeconds() === 3) {channel.send("Only !frog does the trick!");}
     }, 1000);
 });
 
@@ -44,10 +45,10 @@ bot.on('message', message => {
             message.channel.send("UwU");
         }
     }
-    if (message.content.toLocaleLowerCase() === '!sauce') {
+    if (message.content.toLowerCase() === '!sauce') {
         message.channel.send("```Type !sauce to get this message.\nType !dude to get excited for next wednesday.\nType !frog to choose the channel for Dude!```");
     }
-    if (message.content.toLocaleLowerCase() === '!frog') {
+    if (message.content.toLowerCase() === '!frog') {
         message.channel.send("Dude will inform you in this channel of every wednesday. For the rest of your life.");
         channel = message.channel.id;
     }
