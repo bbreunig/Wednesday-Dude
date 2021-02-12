@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 var channel;
 
 bot.on("guildCreate", message => {
-    message.send("Hello my dudes. To stay informed of wednesdays, please type !frog into the desired channel");
+    message.send("Hello my dudes. To stay informed of wednesdays, please type !frog into the desired channel for more info type !sauce");
 });
 
 bot.on("ready", () => {
