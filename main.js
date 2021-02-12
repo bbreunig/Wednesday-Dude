@@ -1,13 +1,18 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
+var channel;
+
+bot.on("guildCreate", message => {
+    message.send("Hello my dudes. To stay informed of wednesdays, please type !frog into the desired channel");
+});
+
 bot.on("ready", () => {
     console.log("Bot activated. Ready to scream"); 
     
     setInterval(() => {
         var date = new Date();
-        const channel = bot.channels.cache.find(channel => channel.id === "764604038271467553");
-
+        
         if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {   
             channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
@@ -38,6 +43,15 @@ bot.on('message', message => {
         if (message.content.toLowerCase() === "!dudette") {
             message.channel.send("UwU");
         }
+    }
+    if (message.content.toLocaleLowerCase() === '!info') {
+        message.channel.send("Type !info to get this message.\n\
+                                Type !dude to get excited for next wednesday.\n\
+                                Type !frog to choose the channel for Dude!");
+    }
+    if (message.content.toLocaleLowerCase() === '!frog') {
+        message.channel.send("Dude will inform you in this channel of every wednesday. For the rest of your life.");
+        channel = message.channel.id;
     }
 });
 
