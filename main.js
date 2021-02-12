@@ -4,8 +4,6 @@ const bot = new Discord.Client();
 bot.on("ready", () => {
     console.log("Bot activated. Ready to scream"); 
     
-    const test = bot.channels.cache.find(channel => channel.id === "428856232485453825");
-    // var ourchannel = Discord.channel.id("764604038271467553"); 
     setInterval(() => {
         var date = new Date();
         const channel = bot.channels.cache.find(channel => channel.id === "764604038271467553");
@@ -15,15 +13,10 @@ bot.on("ready", () => {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
         }
-        if((date.getMinutes() === 13) && date.getSeconds() === 0) {
-            console.log("sending to channel: " + channel.name);
-            channel.send("It's just a test");
-        }
     }, 1000);
 });
 
 bot.on('message', message => {
-    console.log("message received: " + message.content);
     if (message.content.toLowerCase() === '!dude' || message.content.toLowerCase() === '!dudette') {
         var current = new Date(),
         nextwdn = new Date();
