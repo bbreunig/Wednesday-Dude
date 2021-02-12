@@ -14,7 +14,7 @@ bot.on("ready", () => {
         var date = new Date();
         
         if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {   
-            client.channels.fetch(currentchannel)
+            bot.channels.fetch(currentchannel)
                 .then(channel => console.log(channel.name))
                 .catch(console.error);
             currentchannel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
@@ -22,7 +22,7 @@ bot.on("ready", () => {
             });
         }
         if(date.getSeconds() === 3) {
-            client.channels.fetch(currentchannel)
+            bot.channels.fetch(currentchannel)
                 .then(channel => console.log(channel.name))
                 .catch(console.error);
             currentchannel.send("Only !frog does the trick!");
