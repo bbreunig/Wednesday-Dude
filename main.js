@@ -7,7 +7,7 @@ bot.on("ready", () => {
     
     const test = bot.channels.cache.find(channel => channel.id === "428856232485453825");
     // var ourchannel = Discord.channel.id("764604038271467553");
-    
+    checkWdn();
     function checkWdn() {
         var date = new Date();
         const channel = bot.channels.cache.find(channel => channel.createdTimestamp === Discord.Guild.createdTimestamp);
@@ -16,7 +16,7 @@ bot.on("ready", () => {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
         }
-        if(date.getMinutes() === 52) {
+        if(date.getMinutes() === 54) {
             channel.send("It's just a test");
         }
         setTimeout(checkWdn, 1000);
