@@ -6,7 +6,7 @@ bot.on("ready", () => {
     
     const test = bot.channels.cache.find(channel => channel.id === "428856232485453825");
     // var ourchannel = Discord.channel.id("764604038271467553"); 
-    for(date.getSeconds() in new Date) {
+    setInterval(() => {
         const channel = bot.channels.cache.find(channel => channel.createdTimestamp === Discord.Guild.createdTimestamp);
 
         if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 0)) {   
@@ -14,11 +14,11 @@ bot.on("ready", () => {
                 files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
             });
         }
-        if((date.getMinutes() === 50)) {
+        if((date.getMinutes() === 55)) {
             channel.send("It's just a test");
             console.log("sending to channel: " + channel.name);
         }
-    }
+    }, 1000);
 });
 
 bot.on('message', message => {
