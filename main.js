@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 
 var currentchannel;
 
-var stream = fs.readFile('~/channels.txt', 'utf8' , (err, data) => {
+var stream = fs.readFile('channels.txt', 'utf8' , (err, data) => {
     if (err) {
       console.error(err)
       return
@@ -68,7 +68,7 @@ bot.on('message', message => {
     }
     if (message.content.toLowerCase() === '!frog') {
         message.channel.send("Dude will inform you in this channel of every wednesday. For the rest of your life.");
-        fs.writeFile('~/channels.txt', message.channel.id + ",",  err => {
+        fs.writeFile('channels.txt', message.channel.id + ",",  err => {
             if (err) {
               console.error(err)
               return
