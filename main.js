@@ -22,22 +22,20 @@ bot.on("ready", () => {
     setInterval(() => {
         var date = new Date();
         if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {   
-            for(var i = 0; i < currentchannel.length; i++) {
-                var ch = new Discord.Channel(bot, currentchannel[i]);
+            currentchannel.forEach(ch => {
                 ch.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
                     files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
                 });
-            }
+            });
         }
         if(date.getSeconds() === 3) {
-            for(var i = 0; i < currentchannel.length; i++) {
-                var ch = new Discord.Channel(bot, currentchannel[i]);
+            currentchannel.forEach(ch => {
                 bot.channels.fetch(ch)
                     .then(channel => console.log(channel.name))
                     .catch(console.error);
                 ch.send("Only !frog does the trick!")
                     .catch(console.error);
-            }
+            });
         }
     }, 1000);
 });
