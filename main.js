@@ -37,7 +37,7 @@ bot.on('message', message => {
         message.channel.send("```Type !sauce to get this message.\nType !dude to get excited for next wednesday.\nType !frog to choose the channel for Dude!```");
     }
     if (message.content.toLowerCase() === '!frog') {
-        message.channel.send("Dude will inform you in this channel of every wednesday. For the rest of your life.");
+        message.channel.send("Dude will inform you in this channel of every wednesday. Until he has to restart");
         setInterval(() => {
             var date = new Date();
             if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
@@ -45,16 +45,8 @@ bot.on('message', message => {
                         files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
                     });
             }
-            if(date.getSeconds() === 3) {
-                    message.channel.send("Only !frog does the trick!")
-                        .catch(console.error);
-            }
         }, 1000);
     }
 });
-
-
-
-// "764604038271467553"
 
 bot.login(process.env.token);
