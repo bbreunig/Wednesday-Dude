@@ -41,13 +41,12 @@ bot.on('message', message => {
         setInterval(() => {
             var date = new Date();
             if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
-                    var ch = new Discord.Channel(bot, currentchannel[i]);
-                    ch.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
+                    message.channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
                         files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
                     });
             }
             if(date.getSeconds() === 3) {
-                    ch.send("Only !frog does the trick!")
+                    message.channel.send("Only !frog does the trick!")
                         .catch(console.error);
             }
         }, 1000);
