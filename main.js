@@ -1,16 +1,5 @@
 const Discord = require('discord.js');
-const fs = require("fs");
 const bot = new Discord.Client();
-
-var currentchannel;
-
-var stream = fs.readFile('channels.txt', 'utf8' , (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    currentchannel = data.split(",");
-  });
 
 bot.on("guildCreate", message => {
     message.send("Hello my dudes. To stay informed of wednesdays, please type !frog into the desired channel for more info type !sauce");
@@ -19,27 +8,6 @@ bot.on("guildCreate", message => {
 bot.on("ready", () => {
     console.log("Bot activated. Ready to scream"); 
     
-    setInterval(() => {
-        var date = new Date();
-        if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {   
-            for(var i = 0; i < currentchannel.length; i++) {
-                var ch = new Discord.Channel(bot, currentchannel[i]);
-                ch.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
-                    files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
-                });
-            }
-        }
-        if(date.getSeconds() === 3) {
-            for(var i = 0; i < currentchannel.length; i++) {
-                var ch = new Discord.Channel(bot, currentchannel[i]);
-                bot.channels.fetch(ch)
-                    .then(channel => console.log(channel.name))
-                    .catch(console.error);
-                ch.send("Only !frog does the trick!")
-                    .catch(console.error);
-            }
-        }
-    }, 1000);
 });
 
 bot.on('message', message => {
@@ -70,13 +38,19 @@ bot.on('message', message => {
     }
     if (message.content.toLowerCase() === '!frog') {
         message.channel.send("Dude will inform you in this channel of every wednesday. For the rest of your life.");
-        fs.writeFile('channels.txt', message.channel.id + ",",  err => {
-            if (err) {
-              console.error(err)
-              return
+        setInterval(() => {
+            var date = new Date();
+            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
+                    var ch = new Discord.Channel(bot, currentchannel[i]);
+                    ch.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
+                        files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
+                    });
             }
-            //file written successfully
-          });
+            if(date.getSeconds() === 3) {
+                    ch.send("Only !frog does the trick!")
+                        .catch(console.error);
+            }
+        }, 1000);
     }
 });
 
