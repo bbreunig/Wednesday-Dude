@@ -9,7 +9,7 @@ var stream = fs.readFile('channels.txt', 'utf8' , (err, data) => {
       console.error(err)
       return
     }
-    currentchannel = data.trim(",");
+    currentchannel = data.split(",");
   });
 
 bot.on("guildCreate", message => {
