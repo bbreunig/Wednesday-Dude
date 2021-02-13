@@ -6,8 +6,7 @@ bot.on("guildCreate", message => {
 });
 
 bot.on("ready", () => {
-    console.log("Bot activated. Ready to scream"); 
-    bot.user.setStatus('Waiting for wednesday...');
+    console.log("Bot activated. Ready to scream");
 });
 
 bot.on('message', message => {
@@ -41,7 +40,7 @@ bot.on('message', message => {
         message.channel.send("```Type !sauce to get this message.\nType !dude to get excited for next wednesday.\nType !frog to choose the channel for Dude!```");
     }
     if (message.content.toLowerCase() === '!emo') {
-        message.channel.send("Felt emo, might delete it.", {
+        message.channel.send("Felt emo, might delete it later.", {
             files: ["https://i.kym-cdn.com/photos/images/original/001/091/410/474.jpg"]
         });
     }
@@ -61,11 +60,9 @@ bot.on('message', message => {
                 bot.user.setStatus('Waiting for wednesday...');
             }
             if(date.getSeconds() == 0) {
-                bot.user.setAvatar('https://res.cloudinary.com/teepublic/image/private/s--zaLrEa9G--/t_Preview/b_rgb:c62b29,c_limit,f_jpg,h_630,q_90,w_630/v1524539230/production/designs/2621939_0.jpg');
-
-            }
-            if(date.getSeconds() == 59) {
-                bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
+                bot.user.setActivity('Waiting for wednesday...');
+                bot.user.setStatus('Waiting for wednesday...');
+                
             }
         }, 1000);
     }
