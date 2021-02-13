@@ -25,7 +25,11 @@ bot.on('message', message => {
         var distance = nextwdn - current;
 
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) - 1;
+        if (((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) == 0){
+            var hours = 23;
+        } else {
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) ) - 1;
+        }
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         message.channel.send("Next wednesday will be in " + days + "days " + hours + "hours " + minutes + "minutes and " + seconds + "seconds");
@@ -40,10 +44,20 @@ bot.on('message', message => {
         message.channel.send("Dude will inform you in this channel of every wednesday. Until he has to restart");
         setInterval(() => {
             var date = new Date();
-            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
+            if((date.getDay() === 2) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
                     message.channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
                         files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
                     });
+                    bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
+            }
+            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
+                bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
+            }
+            if(date.getSeconds() == 0) {
+                bot.user.setAvatar('https://res.cloudinary.com/teepublic/image/private/s--zaLrEa9G--/t_Preview/b_rgb:c62b29,c_limit,f_jpg,h_630,q_90,w_630/v1524539230/production/designs/2621939_0.jpg');
+            }
+            if(date.getSeconds() == 59) {
+                bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
             }
         }, 1000);
     }
