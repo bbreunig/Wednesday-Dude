@@ -23,8 +23,7 @@ bot.on("ready", () => {
         var date = new Date();
         if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {   
             for(var i = 0; i < currentchannel.length; i++) {
-                var ch = new Discord.Channel();
-                ch  = currentchannel[i];
+                var ch = new Discord.Channel(bot, currentchannel[i]);
                 ch.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
                     files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
                 });
@@ -32,8 +31,7 @@ bot.on("ready", () => {
         }
         if(date.getSeconds() === 3) {
             for(var i = 0; i < currentchannel.length; i++) {
-                var ch = new Discord.Channel();
-                ch = currentchannel[i];
+                var ch = new Discord.Channel(bot, currentchannel[i]);
                 bot.channels.fetch(ch)
                     .then(channel => console.log(channel.name))
                     .catch(console.error);
