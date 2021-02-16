@@ -48,21 +48,21 @@ bot.on('message', message => {
         message.channel.send("Dude will inform you in this channel of every wednesday. Until he has to restart");
         setInterval(() => {
             var date = new Date();
-            if((date.getDay() === 2) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
+            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 1)) {
                     message.channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
                         files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
                     });
                     bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
                     bot.user.setStatus('It\'s wednesday my dudes!!!');
             }
-            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
+            if((date.getDay() === 4) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 1)) {
                 bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
                 bot.user.setStatus('Waiting for wednesday...');
             }
             if(date.getSeconds() == 0) {
                 bot.user.setActivity('Waiting for wednesday...');
                 bot.user.setStatus('Waiting for wednesday...');
-                
+                message.channel.send("I will now tell the time to test: " + date);
             }
         }, 1000);
     }
