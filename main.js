@@ -70,7 +70,7 @@ bot.on('message', message => {
         message.channel.send("Dude will inform you in this channel of every wednesday. Until he has to restart");
         setInterval(() => {
             var date = new Date();
-            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 1)) { 
+            if((date.getDay() === 3) && (date.getMinutes() === 0) && (date.getHours() === 1)) { 
                 const logo = "https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png";
                 const embed = new Discord.MessageEmbed()
                     .setTitle("It's wednesday my dudes. AAAAAAAAAAAHHH.")
@@ -86,7 +86,19 @@ bot.on('message', message => {
                 bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
                 bot.user.setStatus('Waiting for wednesday...');
             }
-        }, 1000);
+            if((date.getDay() === 3) && (date.getMinutes() === 5) && (date.getHours() === 1)) { 
+                const logo = "https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png";
+                const embed = new Discord.MessageEmbed()
+                    .setTitle("It's wednesday my dudes. AAAAAAAAAAAHHH.")
+                    .setAuthor("Wednesday-Dude")
+                    .setImage('https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg')
+                    .setColor('#E1D2B3')
+                    .setLogo(logo);
+                message.channel.send(embed);
+                bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
+                bot.user.setStatus('It\'s wednesday my dudes!!!');
+            }
+        }, 60000);
     }
 });
 
