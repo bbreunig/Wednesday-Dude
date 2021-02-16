@@ -86,7 +86,7 @@ bot.on('message', message => {
                 bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
                 bot.user.setStatus('Waiting for wednesday...');
             }
-            if((date.getDay() === 3) && (date.getMinutes() === 5) && (date.getHours() === 1)) { 
+            if((date.getDay() === 3) && (date.getMinutes() === 10) && (date.getHours() === 1)) { 
                 const logo = "https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png";
                 const embed = new Discord.MessageEmbed()
                     .setTitle("It's wednesday my dudes. AAAAAAAAAAAHHH.")
@@ -98,6 +98,9 @@ bot.on('message', message => {
                 bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
                 bot.user.setStatus('It\'s wednesday my dudes!!!');
             }
+            const test = new Discord.MessageEmbed()
+            .set Title("test" + date);
+            message.channel.send(test);
         }, 60000);
     }
 });
