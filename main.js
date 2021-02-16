@@ -24,7 +24,7 @@ bot.on('message', message => {
         var distance = nextwdn - current;
 
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        if (((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) == 0){
+        if (((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) === 0){
             var hours = 23;
         } else {
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) ) - 1;
@@ -58,11 +58,6 @@ bot.on('message', message => {
             if((date.getDay() === 4) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 1)) {
                 bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
                 bot.user.setStatus('Waiting for wednesday...');
-            }
-            if(date.getSeconds() == 0) {
-                bot.user.setActivity('Waiting for wednesday...');
-                bot.user.setStatus('Waiting for wednesday...');
-                message.channel.send("I will now tell the time to test: " + date);
             }
         }, 1000);
     }
