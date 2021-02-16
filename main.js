@@ -99,7 +99,7 @@ bot.on('message', message => {
                 bot.user.setStatus('It\'s wednesday my dudes!!!');
             }
             const test = new Discord.MessageEmbed()
-            .set Title("test" + date);
+            .setTitle("test" + date);
             message.channel.send(test);
         }, 60000);
     }
