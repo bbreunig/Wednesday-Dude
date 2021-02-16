@@ -37,7 +37,29 @@ bot.on('message', message => {
         }
     }
     if (message.content.toLowerCase() === '!sauce') {
-        message.channel.send("```Type !sauce to get this message.\nType !dude to get excited for next wednesday.\nType !frog to choose the channel for Dude!```");
+        const embed = new Discord.MessageEmbed()
+            .setTitle("Wednesday-Dude help")
+            .addFields(
+                {
+                    name: "!sauce",
+                    value: "Shows this message",
+                },
+                {
+                    name: "!dude",
+                    value: "Countdown to next wednesday",
+                },
+                {
+                    name: "!frog",
+                    value: "sets wedensday dude in channel",
+                },
+                {
+                    name: "!emo",
+                    value: "sad frog :(",
+                }
+            )
+            .setAuthor(message.author.username)
+            .setColor('#E1D2B3');
+        message.channel.send(embed);
     }
     if (message.content.toLowerCase() === '!emo') {
         message.channel.send("Felt emo, might delete it later.", {
@@ -48,12 +70,17 @@ bot.on('message', message => {
         message.channel.send("Dude will inform you in this channel of every wednesday. Until he has to restart");
         setInterval(() => {
             var date = new Date();
-            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 1)) {
-                    message.channel.send("It's wednesday my dudes. AAAAAAAAAAAHHH.", {
-                        files: ['https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg']
-                    });
-                    bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
-                    bot.user.setStatus('It\'s wednesday my dudes!!!');
+            if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 1)) { 
+                const logo = "https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png";
+                const embed = new Discord.MessageEmbed()
+                    .setTitle("It's wednesday my dudes. AAAAAAAAAAAHHH.")
+                    .setAuthor("Wednesday-Dude")
+                    .setImage('https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg')
+                    .setColor('#E1D2B3')
+                    .setLogo(logo);
+                message.channel.send(embed);
+                bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
+                bot.user.setStatus('It\'s wednesday my dudes!!!');
             }
             if((date.getDay() === 4) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 1)) {
                 bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
