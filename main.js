@@ -55,7 +55,7 @@ bot.on('message', message => {
             .setColor('#E1D2B3');
         message.channel.send(embed);
     }
-    if (message.content.toLowerCase() === '!dudette') {
+    if (message.content.toLowerCase() === '!dudette' && message.author.id === "268001523588399104") {
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay() != 3) {
