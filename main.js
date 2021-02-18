@@ -96,7 +96,7 @@ bot.on('message', message => {
                     value: seconds + " s",
                 },
                 {
-                    name: "",
+                    name: "*blushes*",
                     value: "UwU",
                 }
             )
