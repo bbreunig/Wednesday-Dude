@@ -50,6 +50,7 @@ bot.on('message', message => {
                     name: "Seconds",
                     value: seconds + " s",
                 }
+            )
             .setAuthor(message.author.username)
             .setColor('#E1D2B3');
         if (message.content.toLowerCase() === "!dudette") {
