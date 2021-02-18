@@ -31,10 +31,32 @@ bot.on('message', message => {
         }
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        message.channel.send("Next wednesday will be in " + days + "days " + hours + "hours " + minutes + "minutes and " + seconds + "seconds");
+        const embed = new Discord.MessageEmbed()
+            .setTitle("Countdown until next wednesday")
+            .addFields(
+                {
+                    name: "Days",
+                    value: days + " d",
+                },
+                {
+                    name: "Hours",
+                    value: hours + " h",
+                },
+                {
+                    name: "Minutes",
+                    value: minutes + " m",
+                },
+                {
+                    name: "Seconds",
+                    value: seconds + " s",
+                }
+            .setAuthor(message.author.username)
+            .setColor('#E1D2B3');
         if (message.content.toLowerCase() === "!dudette") {
-            message.channel.send("UwU");
+            embed.setImage("https://static.zerochan.net/Moriya.Suwako.full.1849648.jpg")
+                .addField("UwU", "");
         }
+        message.channel.send(embed);
     }
     if (message.content.toLowerCase() === '!sauce') {
         const embed = new Discord.MessageEmbed()
@@ -62,15 +84,22 @@ bot.on('message', message => {
         message.channel.send(embed);
     }
     if (message.content.toLowerCase() === '!emo') {
-        message.channel.send("Felt emo, might delete it later.", {
-            files: ["https://i.kym-cdn.com/photos/images/original/001/091/410/474.jpg"]
-        });
+        const embed = new Discord.MessageEmbed()
+            .setTitle("Felt emo, might delete it later.")
+            .setImage("https://i.kym-cdn.com/photos/images/original/001/091/410/474.jpg")
+            .setColor('#E1D2B3');
+        message.channel.send(embed);
     }
     if (message.content.toLowerCase() === '!frog') {
-        message.channel.send("Dude will inform you in this channel of every wednesday. Until he has to restart");
+        const thunail = 'https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png';
+        const info = new Discord.MessageEmbed()
+            .setTitle("My Dudes, be ready for next wednesday")
+            .setThumbnail(thunail)
+            .setColor('#E1D2B3');
+        message.channel.send(info);
         setInterval(() => {
             var date = new Date();
-            if((date.getDay() === 2) && (date.getMinutes() === 0) && (date.getSeconds() === 0) && (date.getHours() === 23)) { 
+            if((date.getDay() === 2) && (date.getMinutes() === 0) && (date.getSeconds() === 0) && (date.getHours() === 23)) {
                 const logo = "https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png";
                 const embed = new Discord.MessageEmbed()
                     .setTitle("It's wednesday my dudes. AAAAAAAAAAAHHH.")
