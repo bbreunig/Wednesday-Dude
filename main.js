@@ -37,18 +37,22 @@ bot.on('message', message => {
                 {
                     name: "Days",
                     value: days + " d",
+                    inline: true,
                 },
                 {
                     name: "Hours",
                     value: hours + " h",
+                    inline: true,
                 },
                 {
                     name: "Minutes",
                     value: minutes + " m",
+                    inline: true,
                 },
                 {
                     name: "Seconds",
                     value: seconds + " s",
+                    inline: true,
                 }
             )
             .setAuthor(message.author.username)
@@ -134,11 +138,12 @@ bot.on('message', message => {
         const embed = new Discord.MessageEmbed()
             .setTitle("Felt emo, might delete it later.")
             .setImage("https://i.kym-cdn.com/photos/images/original/001/091/410/474.jpg")
-            .setColor('#E1D2B3');
+            .setColor('#E1D2B3')
+            .setThumbnail("https://cdn.discordapp.com/attachments/641285413100847106/812001851372994610/emo.png");
         message.channel.send(embed);
     }
     if (message.content.toLowerCase() === '!frog') {
-        const thunail = 'https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png';
+        const thunail = 'http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg';
         const info = new Discord.MessageEmbed()
             .setTitle("My Dudes, be ready for next wednesday")
             .setThumbnail(thunail)
@@ -159,7 +164,7 @@ bot.on('message', message => {
                 bot.user.setStatus('It\'s wednesday my dudes!!!');
             }
             if((date.getDay() === 3) && (date.getSeconds() === 0) && (date.getMinutes() === 0) && (date.getHours() === 23)) {
-                bot.user.setAvatar('http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg');
+                bot.user.setAvatar(thunail);
                 bot.user.setStatus('Waiting for wednesday...');
             }
         }, 1000);
