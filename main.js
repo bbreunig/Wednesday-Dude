@@ -143,7 +143,7 @@ bot.on('message', message => {
             .setTitle("Felt emo, might delete it later.")
             .setImage("https://i.kym-cdn.com/photos/images/original/001/091/410/474.jpg")
             .setColor('#E1D2B3')
-            .setThumbnail("https://cdn.discordapp.com/attachments/641285413100847106/812001851372994610/emo.png");
+            .setThumbnail("https://cdn.discordapp.com/attachments/452589510069452800/812055487276253254/emo.png");
         message.channel.send(embed);
     }
     if (message.content.toLowerCase() === '!frog') {
