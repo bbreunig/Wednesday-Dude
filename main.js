@@ -10,7 +10,7 @@ bot.on("ready", () => {
 });
 
 bot.on('message', message => {
-    if (message.content.toLowerCase() === '!dude' || message.content.toLowerCase() === '!dudette') {
+    if (message.content.toLowerCase() === '!dude') {
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay() != 3) {
@@ -53,10 +53,56 @@ bot.on('message', message => {
             )
             .setAuthor(message.author.username)
             .setColor('#E1D2B3');
-        if (message.content.toLowerCase() === "!dudette") {
-            embed.setImage("https://static.zerochan.net/Moriya.Suwako.full.1849648.jpg")
-                .addField("UwU", "");
+        message.channel.send(embed);
+    }
+    if (message.content.toLowerCase() === '!dudette') {
+        var current = new Date(),
+        nextwdn = new Date();
+        while(nextwdn.getDay() != 3) {
+            var nextday = nextwdn.getDate()+1;
+            nextwdn.setDate(nextday);
         }
+        nextwdn.setHours(0);
+        nextwdn.setMinutes(0);
+        nextwdn.setSeconds(0);
+
+        var distance = nextwdn - current;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        if (((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) === 0){
+            var hours = 23;
+        } else {
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) ) - 1;
+        }
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const embed = new Discord.MessageEmbed()
+            .setTitle("Countdown until next wednesday")
+            .addFields(
+                {
+                    name: "Days",
+                    value: days + " d",
+                },
+                {
+                    name: "Hours",
+                    value: hours + " h",
+                },
+                {
+                    name: "Minutes",
+                    value: minutes + " m",
+                },
+                {
+                    name: "Seconds",
+                    value: seconds + " s",
+                },
+                {
+                    name: "",
+                    value: "UwU",
+                }
+            )
+            .setImage("https://static.zerochan.net/Moriya.Suwako.full.1849648.jpg")
+            .setAuthor(message.author.username)
+            .setColor('#E1D2B3');
         message.channel.send(embed);
     }
     if (message.content.toLowerCase() === '!sauce') {
