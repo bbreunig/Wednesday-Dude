@@ -176,4 +176,4 @@ bot.on('message', message => {
     }
 });
 
-bot.login(process.env.DISCORD_TOKEN);
+bot.login(process.env.token);
