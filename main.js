@@ -1,5 +1,12 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
+require("dotenv-flow").config();
+
+const config = {
+    token: process.env.token,
+    prefix: process.env.prefix,
+    owner: process.env.owner
+};
 
 bot.on("guildCreate", message => {
     message.send("Hello my dudes. To stay informed of wednesdays, please type !frog into the desired channel for more info type !sauce");
@@ -175,4 +182,4 @@ bot.on('message', message => {
     }
 });
 
-bot.login(process.env.token);
+bot.login(config.token);
