@@ -194,13 +194,16 @@ bot.on('message', message => {
             let memeUrl = `https://reddit.com${permalink}`;
             let memeAuthor = content[0].data.children[0].data.author;
             let memeImage = content[0].data.children[0].data.url;
-            embed.setTitle("Here you go my Dude");
-            embed.setAuthor(`${memeAuthor}`);
-            embed.setURL(`${memeUrl}`);
-            embed.setImage(memeImage);
-            embed.setColor('#E1D2B3');
-            embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
-            message.channel.send(embed);
+            let isvideo = content[0].data.children[0].data.is_video;
+            if(!isvideo) {
+                embed.setTitle("Here you go my Dude");
+                embed.setAuthor(`${memeAuthor}`);
+                embed.setURL(`${memeUrl}`);
+                embed.setImage(memeImage);
+                embed.setColor('#E1D2B3');
+                embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
+                message.channel.send(embed);
+            }
         });
     }
 
