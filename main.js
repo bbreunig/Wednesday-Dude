@@ -182,7 +182,6 @@ bot.on('message', message => {
             let memeComNumber = content[0].data.children[0].data.num_comments;
             let memeVideo = content[0].data.children[0].data.is_video;
             let memeType = content[0].data.children[0].data.type;
-            console.log(memeType, memeVideo);
 
             if(memeVideo === false && memeType == undefined) {
                 embed.setTitle(`${memeTitle}`);
@@ -194,13 +193,14 @@ bot.on('message', message => {
                 embed.setFooter(`↑${memeUpvotes} ↓${memeDownvotes}  💬${memeComNumber}`);
                 message.channel.send(embed);
             } else {
+                var attach = new Discord.MessageAttachment(memeUrl)
                 embed.setTitle("Found a video");
                 embed.setDescription("Unfortunately I can't play videos for now. Try again I will do my best to find pictures for you");
                 embed.setColor('#E1D2B3');
                 embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
                 embed.setTimestamp();
                 embed.setFooter("Maybe one day Discord will add Videos to embed messages...");
-                message.channel.send(embed);
+                message.channel.send(embed, attach);
             }
         });
     }
