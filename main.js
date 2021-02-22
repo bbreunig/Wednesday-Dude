@@ -174,6 +174,14 @@ bot.on('message', message => {
             }
         }, 1000);
     }
+
+    if(message.author.id === "452587188463468569") {
+        const embed = new Discord.MessageEmbed()
+            .setTitle("The Dude approves this message and will side with " + message.author.username + "!")
+            .setTimestamp()
+            .setFooter("I love you " + message.author.username);
+        message.channel.send(embed);
+    }
 });
 
 bot.login(process.env.token);
