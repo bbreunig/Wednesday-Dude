@@ -1,5 +1,6 @@
 require("dotenv").config();
 const Discord = require('discord.js');
+const got = require("got");
 const bot = new Discord.Client();
 
 bot.on("guildCreate", message => {
@@ -159,12 +160,18 @@ bot.on('message', message => {
             if((date.getDay() === 2) && (date.getMinutes() === 0) && (date.getSeconds() === 0) && (date.getHours() === 23)) {
                 const logo = "https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png";
                 const embed = new Discord.MessageEmbed()
-                    .setTitle("It's wednesday my dudes. AAAAAAAAAAAHHH.")
-                    .setAuthor("Wednesday-Dude")
-                    .setImage('https://cdn.discordapp.com/attachments/764604038271467553/809079104854425690/image0-1.jpg')
-                    .setColor('#E1D2B3')
-                    .setThumbnail(logo);
-                message.channel.send(embed);
+                got("https://www.reddit.com/r/ItIsWednesday/random/.json").then(response => {
+                    let content = JSON.parse(response.body);
+                    let permalink = content[0].data.children[0].data.permalink;
+                    let memeUrl = `https://reddit.com${permalink}`;
+                    let memeImage = content[0].data.children[0].data.url;
+                    embed.setTitle("It's wednesday my dudes. AAAAAAAAAAAHHH.");
+                    embed.setAuthor("Wednesday-Dude");
+                    embed.setImage(memeImage);
+                    embed.setColor('#E1D2B3');
+                    embed.setThumbnail(logo);
+                    message.channel.send(embed);
+                });
                 bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
                 bot.user.setStatus('It\'s wednesday my dudes!!!');
             }
@@ -173,6 +180,24 @@ bot.on('message', message => {
                 bot.user.setStatus('Waiting for wednesday...');
             }
         }, 1000);
+    }
+
+    if(message.content.toLowerCase() === "!pic") {
+        const embed = new Discord.MessageEmbed()
+        got('https://www.reddit.com/r/ItIsWednesday/random/.json').then(response => {
+            let content = JSON.parse(response.body);
+            let permalink = content[0].data.children[0].data.permalink;
+            let memeUrl = `https://reddit.com${permalink}`;
+            let memeAuthor = content[0].data.children[0].data.author;
+            let memeImage = content[0].data.children[0].data.url;
+            embed.setTitle("Here you go my Dude");
+            embed.setAuthor(`${memeAuthor}`);
+            embed.setURL(`${memeUrl}`);
+            embed.setImage(memeImage);
+            embed.setColor('#E1D2B3');
+            embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
+            message.channel.send(embed);
+        });
     }
 
     if(message.author.id === "452587188463468569") {
