@@ -3,8 +3,26 @@ const Discord = require('discord.js');
 const got = require("got");
 const bot = new Discord.Client();
 
-bot.on("guildCreate", message => {
-    message.send("Hello my dudes. To stay informed of wednesdays, please type !frog into the desired channel for more info type !sauce");
+bot.on("guildCreate", guild => {
+    var joinChannel;
+
+    guild.channels.cache.forEach(channel => {
+        if (
+            channel.type === "text" &&
+            !joinChannel &&
+            channel.permissionsFor(guild.me).has("SEND_MESSAGES")
+        )
+        joinChannel = channel;
+    });
+    if(!joinChannel) return;
+    
+    joinChannel.send(
+        new Discord.MessageEmbed()
+        .setAuthor(guild.name, guild.iconURL({dynamic: true}))
+        .setDescription("Hello my dudes. I will listen to some commands. Type !sauce to see what I can do. Until next wednesday")
+        .setColor('#E1D2B3')
+        .setTimestamp()
+    )
 });
 
 bot.on("ready", () => {
@@ -12,7 +30,10 @@ bot.on("ready", () => {
 });
 
 bot.on('message', message => {
-    if (message.content.toLowerCase() === '!dude') {
+
+    //countdown to wednesday
+    if (message.content.toLowerCase().startsWith("!dude")) {
+        message.delete();
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay() != 3) {
@@ -33,13 +54,13 @@ bot.on('message', message => {
         }
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
         const embed = new Discord.MessageEmbed()
             .setTitle("Countdown until next wednesday")
             .addFields(
                 {
                     name: "Days",
                     value: days + " d",
-                    inline: true,
                 },
                 {
                     name: "Hours",
@@ -58,65 +79,19 @@ bot.on('message', message => {
                 }
             )
             .setAuthor(message.author.username)
+            .setTimestamp()
             .setColor('#E1D2B3');
+            if(message.content.toLowerCase() === '!dudette'/* && message.author.id === "268001523588399104"*/) {
+                embed.addField("*blushes*", "UwU");
+                embed.setImage("https://static.zerochan.net/Moriya.Suwako.full.1849648.jpg");
+            }
         message.channel.send(embed);
     }
-    if (message.content.toLowerCase() === '!dudette' && message.author.id === "268001523588399104") {
-        var current = new Date(),
-        nextwdn = new Date();
-        while(nextwdn.getDay() != 3) {
-            var nextday = nextwdn.getDate()+1;
-            nextwdn.setDate(nextday);
-        }
-        nextwdn.setHours(0);
-        nextwdn.setMinutes(0);
-        nextwdn.setSeconds(0);
-
-        var distance = nextwdn - current;
-
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        if (((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) === 0){
-            var hours = 23;
-        } else {
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60) ) - 1;
-        }
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        const embed = new Discord.MessageEmbed()
-            .setTitle("Countdown until next wednesday")
-            .addFields(
-                {
-                    name: "Days",
-                    value: days + " d",
-                    inline: true,
-                },
-                {
-                    name: "Hours",
-                    value: hours + " h",
-                    inline: true,
-                },
-                {
-                    name: "Minutes",
-                    value: minutes + " m",
-                    inline: true,
-                },
-                {
-                    name: "Seconds",
-                    value: seconds + " s",
-                    inline: true,
-                },
-                {
-                    name: "*blushes*",
-                    value: "UwU",
-                }
-            )
-            .setImage("https://static.zerochan.net/Moriya.Suwako.full.1849648.jpg")
-            .setAuthor(message.author.username)
-            .setColor('#E1D2B3');
-        message.channel.send(embed);
-    }
+    //help message
     if (message.content.toLowerCase() === '!sauce') {
-        const embed = new Discord.MessageEmbed()
+        message.delete();
+        message.channel.send(
+            new Discord.MessageEmbed()
             .setTitle("Wednesday-Dude help")
             .addFields(
                 {
@@ -141,18 +116,23 @@ bot.on('message', message => {
                 }
             )
             .setAuthor(message.author.username)
-            .setColor('#E1D2B3');
-        message.channel.send(embed);
+            .setColor('#E1D2B3')
+        );
     }
+    //emo message
     if (message.content.toLowerCase() === '!emo') {
-        const embed = new Discord.MessageEmbed()
+        message.delete();
+        message.channel.send(
+            new Discord.MessageEmbed()
             .setTitle("Felt emo, might delete it later.")
             .setImage("https://i.kym-cdn.com/photos/images/original/001/091/410/474.jpg")
             .setColor('#E1D2B3')
-            .setThumbnail("https://cdn.discordapp.com/attachments/452589510069452800/812055487276253254/emo.png");
-        message.channel.send(embed);
+            .setThumbnail("https://cdn.discordapp.com/attachments/452589510069452800/812055487276253254/emo.png")
+        );
     }
+    //set Dude
     if (message.content.toLowerCase() === '!frog') {
+        message.delete();
         const thunail = 'http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg';
         const info = new Discord.MessageEmbed()
             .setTitle("My Dudes, be ready for next wednesday")
@@ -185,34 +165,54 @@ bot.on('message', message => {
             }
         }, 1000);
     }
-
+    //reddit picture message
     if(message.content.toLowerCase() === "!pic") {
+        message.delete();
         const embed = new Discord.MessageEmbed()
         got('https://www.reddit.com/r/ItIsWednesday/random/.json').then(response => {
             let content = JSON.parse(response.body);
             let permalink = content[0].data.children[0].data.permalink;
             let memeUrl = `https://reddit.com${permalink}`;
+            let memeSrc = content[0].data.children[0].data.src;
             let memeAuthor = content[0].data.children[0].data.author;
             let memeImage = content[0].data.children[0].data.url;
-            let isvideo = content[0].data.children[0].data.is_video;
-            if(!isvideo) {
-                embed.setTitle("Here you go my Dude");
+            let memeTitle = content[0].data.children[0].data.title;
+            let memeUpvotes = content[0].data.children[0].data.ups;
+            let memeDownvotes = content[0].data.children[0].data.downs;
+            let memeComNumber = content[0].data.children[0].data.num_comments;
+            let memeVideo = content[0].data.children[0].data.is_video;
+            let memeType = content[0].data.children[0].data.type;
+            
+            if(memeVideo === "false" && memeType != "youtube.com" && memeType != "video") {
+                embed.setTitle(`${memeTitle}`);
                 embed.setAuthor(`${memeAuthor}`);
                 embed.setURL(`${memeUrl}`);
                 embed.setImage(memeImage);
                 embed.setColor('#E1D2B3');
                 embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
+                embed.setFooter(`:arrow_up:${memeUpvotes} :arrow_down:${memeDownvotes} :speech_left:${memeComNumber}`)
                 message.channel.send(embed);
+            } else {
+                embed.setTitle("Found a video");
+                embed.setDescription("Unfortunately I can't play videos for now. Try again I will do my best to find pictures for you");
+                embed.setColor('#E1D2B3');
+                embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
+                embed.setTimestamp();
+                embed.setFooter("Maybe one day Discord will add Videos to embed messages...");
             }
         });
     }
-
+    //specific message
     if(message.author.id === "452587188463468569") {
-        const embed = new Discord.MessageEmbed()
-            .setTitle("The Dude approves this message and will side with " + message.author.username + "!")
+        message.delete();
+        message.channel.send(
+            new Discord.MessageEmbed()
+            .setAuthor(message.author.username)
+            .setDescription("The Dude approves this message and will side with " + message.author.username + "!")
             .setTimestamp()
-            .setFooter("I love you " + message.author.username);
-        message.channel.send(embed);
+            .setColor('#E1D2B3')
+            .setFooter("I love you " + message.author.username)
+        );
     }
 });
 
