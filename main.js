@@ -167,7 +167,7 @@ bot.on('message', message => {
     }
     //reddit picture message
     if(message.content.toLowerCase() === "!pic") {
-        message.delete();
+        // message.delete();
         const embed = new Discord.MessageEmbed()
         got('https://www.reddit.com/r/ItIsWednesday/random/.json').then(response => {
             let content = JSON.parse(response.body);
@@ -182,15 +182,16 @@ bot.on('message', message => {
             let memeComNumber = content[0].data.children[0].data.num_comments;
             let memeVideo = content[0].data.children[0].data.is_video;
             let memeType = content[0].data.children[0].data.type;
-            
-            if(memeVideo === "false" && memeType != "youtube.com" && memeType != "video") {
+            console.log(memeType, memeVideo);
+
+            if(memeVideo === false && memeType == undefined) {
                 embed.setTitle(`${memeTitle}`);
                 embed.setAuthor(`${memeAuthor}`);
                 embed.setURL(`${memeUrl}`);
                 embed.setImage(memeImage);
                 embed.setColor('#E1D2B3');
                 embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
-                embed.setFooter(`:arrow_up:${memeUpvotes} :arrow_down:${memeDownvotes} :speech_left:${memeComNumber}`)
+                embed.setFooter(`↑${memeUpvotes} ↓${memeDownvotes}  💬${memeComNumber}`);
                 message.channel.send(embed);
             } else {
                 embed.setTitle("Found a video");
@@ -199,6 +200,7 @@ bot.on('message', message => {
                 embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
                 embed.setTimestamp();
                 embed.setFooter("Maybe one day Discord will add Videos to embed messages...");
+                message.channel.send(embed);
             }
         });
     }
