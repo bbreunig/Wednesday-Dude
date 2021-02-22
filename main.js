@@ -134,6 +134,10 @@ bot.on('message', message => {
                 {
                     name: "!emo",
                     value: "sad frog :(",
+                },
+                {
+                    name: "!pic",
+                    value: "a nice wednesday meme :)"
                 }
             )
             .setAuthor(message.author.username)
