@@ -15,7 +15,7 @@ bot.on("guildCreate", guild => {
         joinChannel = channel;
     });
     if(!joinChannel) return;
-    
+
     joinChannel.send(
         new Discord.MessageEmbed()
         .setAuthor(guild.name, guild.iconURL({dynamic: true}))
@@ -23,6 +23,49 @@ bot.on("guildCreate", guild => {
         .setColor('#E1D2B3')
         .setTimestamp()
     )
+
+    var date = new Date();
+    if((date.getDay() === 2) && (date.getMinutes() === 0) && (date.getSeconds() === 0) && (date.getHours() === 23)) {
+        const logo = "https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png";
+        const embed = new Discord.MessageEmbed()
+        got('https://www.reddit.com/r/ItIsWednesday/random/.json').then(response => {
+            let content = JSON.parse(response.body);
+            let permalink = content[0].data.children[0].data.permalink;
+            let memeUrl = `https://reddit.com${permalink}`;
+            let memeSrc = content[0].data.children[0].data.src;
+            let memeAuthor = content[0].data.children[0].data.author;
+            let memeImage = content[0].data.children[0].data.url;
+            let memeTitle = content[0].data.children[0].data.title;
+            let memeUpvotes = content[0].data.children[0].data.ups;
+            let memeDownvotes = content[0].data.children[0].data.downs;
+            let memeComNumber = content[0].data.children[0].data.num_comments;
+            let memeVideo = content[0].data.children[0].data.is_video;
+            let memeType = content[0].data.children[0].data.type;
+
+            if(memeVideo === false && memeType == undefined) {
+                embed.setTitle(`${memeTitle}`);
+                embed.setAuthor(`${memeAuthor}`);
+                embed.setURL(`${memeUrl}`);
+                embed.setImage(memeImage);
+                embed.setColor('#E1D2B3');
+                embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
+                embed.setFooter(`↑${memeUpvotes} ↓${memeDownvotes}  💬${memeComNumber}`);
+                message.channel.send(embed);
+            } else {
+                var attach = new Discord.MessageAttachment(memeUrl)
+                embed.setTitle("Found a video");
+                embed.setDescription("Unfortunately I can't play videos for now. Try again I will do my best to find pictures for you");
+                embed.setColor('#E1D2B3');
+                embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
+                embed.setTimestamp();
+                embed.setFooter("Maybe one day Discord will add Videos to embed messages...");
+                joinChannel.send(embed, attach);
+            }
+        });
+        bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
+        bot.user.setStatus('It\'s wednesday my dudes!!!');
+    }
+
 });
 
 bot.on("ready", () => {
@@ -81,8 +124,8 @@ bot.on('message', message => {
             .setAuthor(message.author.username)
             .setTimestamp()
             .setColor('#E1D2B3');
-            if(message.content.toLowerCase() === '!dudette'/* && message.author.id === "268001523588399104"*/) {
-                embed.addField("*blushes*", "UwU");
+            if(message.content.toLowerCase() === '!dudette' && message.author.id === "268001523588399104") {
+                embed.setDescription("*blushes* Flavi-chan ribbit UwU such a nice thing to ask of me >.< O...of course I will tell you BAKA!!")
                 embed.setImage("https://static.zerochan.net/Moriya.Suwako.full.1849648.jpg");
             }
         message.channel.send(embed);
