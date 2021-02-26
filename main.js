@@ -140,7 +140,7 @@ bot.on('message', message => {
 
     //countdown to wednesday
     if (message.content.toLowerCase().startsWith("!dude")) {
-        message.delete();
+        if(message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) message.delete();
         var current = new Date(),
         nextwdn = new Date();
         while(nextwdn.getDay() != 3) {
@@ -196,7 +196,7 @@ bot.on('message', message => {
     }
     //help message
     if (message.content.toLowerCase() === '!sauce') {
-        message.delete();
+        if(message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) message.delete();
         message.channel.send(
             new Discord.MessageEmbed()
             .setTitle("Wednesday-Dude help")
@@ -228,7 +228,7 @@ bot.on('message', message => {
     }
     //emo message
     if (message.content.toLowerCase() === '!emo') {
-        message.delete();
+        if(message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) message.delete();
         message.channel.send(
             new Discord.MessageEmbed()
             .setTitle("Felt emo, might delete it later.")
@@ -239,7 +239,7 @@ bot.on('message', message => {
     }
     //set Dude
     if (message.content.toLowerCase() === '!frog') {
-        message.delete();
+        if(message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) message.delete();
         const thunail = 'http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg';
         const info = new Discord.MessageEmbed()
             .setThumbnail(thunail)
@@ -252,7 +252,9 @@ bot.on('message', message => {
             });
             info.setTitle("Hell Yeah");
             info.setDescription("My Dudes, be ready for next wednesday");
-            message.channel.send(info);
+            message.channel.send(info).catch(err => {
+                console.log(err);
+            });
         } else {
             info.setTitle("No Permission");
             info.setDescription("My Dude I can't write to you in that channel. You have to give me permissions first.");
@@ -264,7 +266,7 @@ bot.on('message', message => {
     }
     //reddit picture message
     if(message.content.toLowerCase() === "!pic") {
-        message.delete();
+        if(message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) message.delete();
         const embed = new Discord.MessageEmbed()
         got('https://www.reddit.com/r/ItIsWednesday/random/.json').then(response => {
             let content = JSON.parse(response.body);
