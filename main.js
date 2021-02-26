@@ -105,6 +105,7 @@ bot.on("ready", () => {
                     bot.guilds.cache.forEach(guild => {
                         guildchannel = guild.channels.cache.find(ch => ch.id === bot.chcurrent[guild.name]);
                         if(!guildchannel) return;
+                        if(!guildchannel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
                         guildchannel.send(embed);
                     });
                 } else {
@@ -118,6 +119,7 @@ bot.on("ready", () => {
                     bot.guilds.cache.forEach(guild => {
                         guildchannel = guild.channels.cache.find(ch => ch.id === bot.chcurrent[guild.name]);
                         if(!guildchannel) return;
+                        if(!guildchannel.permissionsFor(message.guild.me).has("SEND_MESSAGES")) return;
                         guildchannel.send(embed);
                     });
                 }
