@@ -239,7 +239,7 @@ bot.on('message', message => {
     }
     //set Dude
     if (message.content.toLowerCase() === '!frog') {
-        //message.delete();
+        message.delete();
         const thunail = 'http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg';
         const info = new Discord.MessageEmbed()
             .setThumbnail(thunail)
@@ -264,7 +264,7 @@ bot.on('message', message => {
     }
     //reddit picture message
     if(message.content.toLowerCase() === "!pic") {
-        // message.delete();
+        message.delete();
         const embed = new Discord.MessageEmbed()
         got('https://www.reddit.com/r/ItIsWednesday/random/.json').then(response => {
             let content = JSON.parse(response.body);
