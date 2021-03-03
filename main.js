@@ -102,12 +102,7 @@ bot.on("ready", () => {
                     embed.setColor('#E1D2B3');
                     embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
                     embed.setFooter(`↑${memeUpvotes} ↓${memeDownvotes}  💬${memeComNumber}`);
-                    bot.guilds.cache.forEach(guild => {
-                        guildchannel = guild.channels.cache.find(ch => ch.id === bot.chcurrent[guild.name]);
-                        if(!guildchannel) return;
-                        if(!guildchannel.permissionsFor(guild.me).has("SEND_MESSAGES")) return;
-                        guildchannel.send(embed);
-                    });
+                    sendToAllChannels(embed);
                 } else {
                     var attach = new Discord.MessageAttachment(memeUrl)
                     embed.setTitle("Found a video");
@@ -116,12 +111,7 @@ bot.on("ready", () => {
                     embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
                     embed.setTimestamp();
                     embed.setFooter("Maybe one day Discord will add Videos to embed messages...");
-                    bot.guilds.cache.forEach(guild => {
-                        guildchannel = guild.channels.cache.find(ch => ch.id === bot.chcurrent[guild.name]);
-                        if(!guildchannel) return;
-                        if(!guildchannel.permissionsFor(guild.me).has("SEND_MESSAGES")) return;
-                        guildchannel.send(embed);
-                    });
+                    sendToAllChannels(embed);
                 }
             });
             bot.user.setAvatar('https://pics.onsizzle.com/Instagram-It-is-time-my-dudes-481279.png');
@@ -131,24 +121,7 @@ bot.on("ready", () => {
             bot.user.setAvatar(thunail);
             bot.user.setStatus('Waiting for wednesday...');
         }
-    }, 1000).catch(err => {
-        console.log(err);
-        embed.setTitle(`${memeTitle}`);
-        embed.setAuthor(`${memeAuthor}`);
-        embed.setURL(`${memeUrl}`);
-        embed.setImage(memeImage);
-        embed.setColor('#E1D2B3');
-        embed.setThumbnail("http://ih0.redbubble.net/image.94777491.1109/flat,1000x1000,075,f.u1.jpg");
-        embed.setFooter(`↑${memeUpvotes} ↓${memeDownvotes}  💬${memeComNumber}`);
-        bot.guilds.cache.forEach(guild => {
-            guildchannel = guild.channels.cache.find(ch => ch.id === bot.chcurrent[guild.name]);
-            if(!guildchannel) return;
-            if(!guildchannel.permissionsFor(guild.me).has("SEND_MESSAGES")) return;
-            guildchannel.send(embed);
-        });
-    });
-
-    
+    }, 1000)
 });
 
 bot.on('message', message => {
@@ -319,5 +292,15 @@ bot.on('message', message => {
         });
     }
 });
+
+const sendToAllChannels = (embed) => {
+    bot.guilds.cache.forEach(guild => {
+        guildchannel = guild.channels.cache.find(ch => ch.id === bot.chcurrent[guild.name]);
+        if(!guildchannel) return;
+        if(guildchannel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+            guildchannel.send(embed);
+        }
+    });
+}
 
 bot.login(process.env.token);
