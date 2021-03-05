@@ -127,7 +127,7 @@ bot.on("ready", () => {
 bot.on('message', message => {
 
     //countdown to wednesday
-    if (message.content.trim().toLowerCase().startsWith("!dude")) {
+    if (message.content.toLowerCase().trim().startsWith("!dude")) {
         if(message.channel.permissionsFor(message.guild.me).has("MANAGE_MESSAGES")) message.delete();
         var current = new Date(),
         nextwdn = new Date();
